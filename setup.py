@@ -44,7 +44,7 @@ setup(
     # You can use `find_packages()` or the `py_modules` argument which expect a
     # single python file
     packages=find_packages(exclude=["contrib", "docs", "tests"]),  # Required
-    entry_points={"console_scripts": ["pycrontab=pycrontab.__main__:main"]},  # Optional
+    entry_points={"console_scripts": ["json-reader=json_reader.__main__:main"]},  # Optional
     url=gh_repo,  # Optional
     author="weaming",  # Optional
     author_email="garden.yuen@gmail.com",  # Optional

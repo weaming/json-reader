@@ -2,3 +2,14 @@
 
 Read JSON and it's variants from a char stream.
 
+## Install
+
+```
+pip instsall -U json-reader
+```
+
+## Usage
+
+* See `json_reader/test_scanner.py`
+* `cat example.log | python -m json_reader`
+* `cat example.log | json_reader`
