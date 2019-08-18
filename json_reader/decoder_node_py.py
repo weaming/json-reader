@@ -31,8 +31,8 @@ class NodePyCompatibleScanner(PyJSONScanner):
 
     def is_infinity(self, nextchar, text):
         nextchar, text = self.normalize(nextchar, text)
-        return nextchar == 'i' and text == 'infinity'
+        return nextchar == 'i' and text in ['infinity', 'inf']
 
     def is_negative_infinity(self, nextchar, text):
         nextchar, text = self.normalize(nextchar, text)
-        return nextchar == '-' and text == '-infinity'
+        return nextchar == '-' and text in ['-infinity', '-inf']

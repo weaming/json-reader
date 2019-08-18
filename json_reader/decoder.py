@@ -60,6 +60,10 @@ class PyJSONScanner:
             return self.parse_constant('Infinity'), idx + 8
         elif self.is_negative_infinity(nextchar, string[idx : idx + 9]):
             return self.parse_constant('-Infinity'), idx + 9
+        elif self.is_infinity(nextchar, string[idx : idx + 3]):
+            return self.parse_constant('Infinity'), idx + 3
+        elif self.is_negative_infinity(nextchar, string[idx : idx + 4]):
+            return self.parse_constant('-Infinity'), idx + 4
         else:
             raise StopIteration(idx)
 
