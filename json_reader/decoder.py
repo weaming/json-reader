@@ -116,3 +116,27 @@ class JSONDecoder(json.JSONDecoder):
 
     def patch_scan_once(self):
         self.scan_once = self.scanner_cls(self).scan_once
+
+
+def iter_loads(text, decoder=None):
+    decoder = decoder or JSONDecoder()
+    while len(text):
+        if text[0] not in ['[', '{']:
+            if '[' in text and '{' in text:
+                idx1 = text.index('[')
+                idx2 = text.index('{')
+                idx = min(idx1, idx2)
+            elif '[' in text:
+                idx = text.index('[')
+            elif '{' in text:
+                idx = text.index('{')
+            else:
+                return
+            text = text[idx:]
+        try:
+            data, idx = decoder.raw_decode(text)
+        except json.decoder.JSONDecodeError:
+            return
+        else:
+            text = text[idx:]
+            yield data, text

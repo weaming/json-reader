@@ -1,3 +1,5 @@
+from json_reader.decoder import iter_loads
+
 example1 = """
 {
   "a": 3,
@@ -51,6 +53,8 @@ example3 = """
 """.strip()
 example4 = example3 + "extra text 1234 {} []"
 
+example5 = "any head" + example2 + example4 + "{"
+
 
 def test_scanner_standard():
     from json_reader.decoder import JSONDecoder
@@ -67,3 +71,12 @@ def test_scanner_changed():
     decoder = JSONDecoder(scanner_cls=CaseInsensitiveScanner)
     data, index = decoder.raw_decode(example4)
     print(data, example4[index:])
+
+
+def test_iter_loads():
+    from json_reader.decoder import JSONDecoder
+    from json_reader.decoder_case_insensitive import CaseInsensitiveScanner
+
+    decoder = JSONDecoder(scanner_cls=CaseInsensitiveScanner)
+    for data, left in iter_loads(example5, decoder=decoder):
+        print(data)
