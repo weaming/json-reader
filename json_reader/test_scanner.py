@@ -26,7 +26,7 @@ example1 = """
 """.strip()
 example2 = example1 + "extra text 1234 {} []"
 
-example3 = """
+example3 = r"""
 {
   "a": 3,
   "b": 3.14,
@@ -48,7 +48,9 @@ example3 = """
   "aa": nan,
   "bb": infinity,
   "cc": -infinity,
-  "dd": "string1"
+  "dd": "string1",
+  "dd": 'string2',
+  "ee": 'str\\'ing3'
 }
 """.strip()
 example4 = example3 + "extra text 1234 {} []"
@@ -66,17 +68,17 @@ def test_scanner_standard():
 
 def test_scanner_changed():
     from json_reader.decoder import JSONDecoder
-    from json_reader.decoder_case_insensitive import CaseInsensitiveScanner
+    from json_reader.decoder_node_py import NodePyCompatibleScanner
 
-    decoder = JSONDecoder(scanner_cls=CaseInsensitiveScanner)
+    decoder = JSONDecoder(scanner_cls=NodePyCompatibleScanner)
     data, index = decoder.raw_decode(example4)
     print(data, example4[index:])
 
 
 def test_iter_loads():
     from json_reader.decoder import JSONDecoder
-    from json_reader.decoder_case_insensitive import CaseInsensitiveScanner
+    from json_reader.decoder_node_py import NodePyCompatibleScanner
 
-    decoder = JSONDecoder(scanner_cls=CaseInsensitiveScanner)
+    decoder = JSONDecoder(scanner_cls=NodePyCompatibleScanner)
     for data, left in iter_loads(example5, decoder=decoder):
         print(data)

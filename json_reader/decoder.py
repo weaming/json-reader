@@ -1,3 +1,4 @@
+import re
 import json
 from json.scanner import NUMBER_RE
 
@@ -63,10 +64,14 @@ class PyJSONScanner:
             raise StopIteration(idx)
 
     def scan_once(self, string, idx):
+        string = self.pre_process(string)
         try:
             return self._scan_once(string, idx)
         finally:
             self.memo.clear()
+
+    def pre_process(self, string):
+        return string
 
     def is_str(self, nextchar):
         return nextchar == '"'
