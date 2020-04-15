@@ -5,7 +5,7 @@ Read JSON and it's variants from a char stream.
 ## Install
 
 ```
-pip instsall -U json-reader
+pip install -U json-reader
 ```
 
 ## Usage
